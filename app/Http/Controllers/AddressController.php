@@ -72,15 +72,14 @@ class AddressController extends Controller
         
         $csv = Writer::createFromPath($csvPath, 'w+');
         $csv->insertOne(['Sortnumber', 'Distance', 'Name', 'Address']);
-        dd($csv);
         
-        // $sortNumber = 1;
-        // foreach ($sortedDistances as $name => $distance) {
-        //     $csv->insertOne([$sortNumber, $distance, $name, $addresses[array_search($name, array_column($addresses, 'name'))]['address']]);
-        //     $sortNumber++;
-        // }
+        $sortNumber = 1;
+        foreach ($sortedDistances as $name => $distance) {
+            $csv->insertOne([$sortNumber, $distance, $name, $addresses[array_search($name, array_column($addresses, 'name'))]['address']]);
+            $sortNumber++;
+        }
 
-        // return response()->download($csvPath, 'distances.csv');
+        return response()->download($csvPath, 'distances.csv');
     }
 
     private function calculateDistance($origin, $destination)

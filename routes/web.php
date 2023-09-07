@@ -14,10 +14,4 @@ use App\Http\Controllers\AddressController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
 Route::get('/', [AddressController::class, 'calculateDistances']);
